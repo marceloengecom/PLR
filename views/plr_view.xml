@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record id="company_menu_action" model="ir.actions.act_window">
+        	<field name="name">Empresas PLR</field>
+        	<field name="res_model">plr.company</field>
+        	<field name="view_type">form</field>
+        	<field name="view_mode">tree,form,kanban</field>
+        	<field name="domain">[]</field>
+        	<field name="help" type="html">
+            	<p class="oe_view_nocontent_create">Criar a primeira empresa com PLR
+            	</p>
+        	</field>
+        </record>
+
+		<!--company tree view-->
+		<record id="company_tree_view" model="ir.ui.view">
+			<field name="name">Empresas PLR Tree</field>
+			<field name="model">plr.company</field>
+			<field name="arch" type="xml">
+				<tree string="Empresas PLR">
+					<field name="name"/>
+					<field name="address_city"/>
+					<field name="company_syndicate"/>
+					<field name="numero_trabalhadores"/>
+					<field name="numero_socios_sindicatos"/>
+					<field name="faturamento"/>
+					<field name="valor_distribuido"/>
+					<field name="comissao_negociacao"/>
+            	</tree>
+			</field>
+		</record>
+
+		<!--company form view-->
+		<record id="company_form_view" model="ir.ui.view">
+			<field name="name">Empresas PLR Form</field>
+			<field name="model">plr.company</field>
+			<field name="arch" type="xml">
+				<form string="Empresas PLR">
+					<sheet>
+						<field name="photo" widget="image" class="oe_left oe_avatar" />
+                    		<div class="oe_title">
+                     			<h1>									
+									<field name="name" placeholder="Nome"/>
+								</h1>
+								<h3>
+									<field name="legal_name" placeholder="Nome Legal"/>
+								</h3>
+								<h4>
+									<field name="cnpj" placeholder="CNPJ"/>
+								</h4>
+							</div>							
+						<group>
+                        	<group>
+                            	<field name="address_street" placeholder="Endereço"/>
+								<field name="address_number" placeholder="Número"/>
+								<field name="address_complement" placeholder="Complemento"/>
+								<field name="address_district" placeholder="Bairro"/>								
+								<field name="address_zip" placeholder="CEP"/>
+                            	<field name="address_city" placeholder="Cidade"/>
+								<field name="address_state" placeholder="Estado"/>
+								<field name="inscr_est" placeholder="Inscrição Estadual"/>
+								<field name="inscr_mun" placeholder="Inscrição Municipal"/>
+								<field name="cipa" placeholder="CIPA"/>
+								<field name="info_complementar_dieese" placeholder="Informações Complementares DIEESE"/>
+                        	</group>
+                        	<group>
+                            	<field name="ceo" placeholder="Diretor/Presidente"/>
+								<field name="fornecedores" placeholder="Fornecedores"/>
+								<field name="numero_trabalhadores" placeholder="Nº Trabalhadores"/>
+                            	<field name="numero_socios_sindicatos" placeholder="Nº Sócios Sindicatos"/>                            									
+								<field name="company_syndicate" placeholder="Sindicato Relacionado"/>
+                            	<field name="faturamento" placeholder="Faturamento"/>
+                            	<field name="lucro_liquido" placeholder="Lucro Líquido"/>
+								<field name="criterio_medicao" placeholder="Critério Medição"/>
+								<field name="valor_distribuido" placeholder="Valor Distribuido"/>								
+								<field name="comissao_negociacao" placeholder="Comissão Negociação"/>								
+                        	</group>							
+                    	</group>
+           			</sheet>
+    			</form>
+			</field>
+		</record>
+
+				 <!--company tree view-->
+		<record id="syndicate_tree_view" model="ir.ui.view">
+			<field name="name">Sindicatos PLR Tree</field>
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+				<tree string="Empresas PLR">
+					<field name="name"/> 					
+					<field name="associate_syndicate"/>
+					<field name="company_syndicate"/>				
+				</tree>
+			</field>
+		</record>
+		
+		<record id="syndicate_search_view" model="ir.ui.view">
+				<field name="name">Pesquisar Sindicados PLR</field>
+				<field name="model">res.partner</field>
+				<field name="type">search</field>
+				<field name="arch" type="xml">            	
+					<search>
+						<filter string="Sindicatos PLR" name="associate_syndicate" domain="[('associate_syndicate','=',1)]"/>
+					</search>
+				</field>
+		</record>	
+
+
+		<record id="syndicate_menu_action" model="ir.actions.act_window">
+        	<field name="name">Sindicatos PLR</field>
+        	<field name="res_model">res.partner</field>
+			<field name="view_mode">tree,form,kanban</field>
+        	<field name="view_type">form</field>        	
+			<field name="context">{"search_default_associate_syndicate":1}</field>        	
+			<field name="search_view_id" ref="syndicate_search_view"/>
+        </record>
+
+		<!--Menu Principal-->
+		<menuitem
+		id="root_menu"
+		name="Participação Lucros e Resultados"
+		sequence="0"/>
+
+		<!--Menus Secundários-->
+    	<menuitem
+		id="plr_company_menu"
+		parent="root_menu"
+		name="Empresas PLR"
+		action="company_menu_action"/>
+		
+		<menuitem
+		id="plr_syndicate_menu"
+		parent="root_menu"
+		name="Sindicatos PLR"
+		action="syndicate_menu_action"/>
+
+	</data>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   	<!-- Add "associate_syndicate" field to existing view -->
+        <record model="ir.ui.view" id="view_syndicate_form_inherit">            
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Participação de Lucros e Resultados">
+                        <group>
+                            <field name="associate_syndicate"/>
+                            <field name="company_syndicate" widget="many2many_tags"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>       
+</odoo>
+
+
+

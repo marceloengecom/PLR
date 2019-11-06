@@ -1,0 +1,37 @@
+<odoo>
+
+    <report
+        id="report_company"
+        model="plr.company"
+        string="Relatório Empresas PLR"
+        name="plr.report_company_view"
+        file="plr.report_company"
+        report_type="qweb-pdf" />
+
+    <template id="report_company_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h3>Nome Empresa: <span t-field="doc.name"/></h3>                        
+                        <h4><p>Cidade: <span t-field="doc.address_city"/></p></h4>
+                        <p></p>
+                        <p>Número de Trabalhadores: <span t-field="doc.numero_trabalhadores"/></p>
+                        <p>Número de Sócios Sindicatos: <span t-field="doc.numero_socios_sindicatos"/></p>
+                        <p>Faturamento: <span t-field="doc.faturamento"/></p>
+                        <p>Lucro Líquido: <span t-field="doc.lucro_liquido"/></p>
+                        <p>Valor Distribuido: <span t-field="doc.valor_distribuido"/></p>
+                         
+                        <h3>Sindicato Relacionado:</h3>
+                        <ul>
+                            <t t-foreach="doc.company_syndicate" t-as="company_syndicate">
+                                <li><span t-field="company_syndicate.name"/></li>
+                            </t>
+                        </ul>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
